@@ -1,0 +1,93 @@
+<h3 style="text-align:center">Lista de tareas</h3>
+    <hr>
+        <div class="container">
+            <div class="col-md-12 text-right">
+                 <a href="<?php echo APP_URL.'tareas/agregar'; ?>">
+                    <button class="btn btn-sm btn-success">Agregar tarea</button>
+
+                 <a href="<?php echo APP_URL. './categorias/agregar'; ?>">
+                    <button class="btn btn-sm btn-success">Agregar categoria</button>
+                </a>
+            </a>
+        </div>
+    </div>
+    <hr>
+    <div class="col-md-12 mg-top-10">
+        <table border="1" class="table table-bordered table-striped text-center">
+                <tr style="text-align:center">
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Prioridad</th>
+                    <th>Categoria</th>
+                    <th>Estado</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <?php foreach ($this->tareas as $tarea): ?>
+                        <tr>
+                            <td>
+                                <?php  echo $tarea["T"]['id'];?>                            
+                            </td>
+                            <td>
+                                <?php  echo $tarea["T"]['nombre'];?>                            
+                            </td>
+                            <td>                                
+                            <?php  
+                                $date = date_create($tarea["T"]['fecha']);
+                                echo date_format($date,'d/m/Y');
+                                ?>                              
+                            </td>
+                            <td>
+                                <?php 
+                                if ($tarea["T"]['prioridad'] <= 3) 
+                                {
+                                    echo "<label class='text-success font-weight-bold'></label>Baja";
+                                }
+                                else if ($tarea["T"]['prioridad'] <=6) 
+                                {
+                                    echo "<label class='text-warning font-weight-bold'></label>Media";
+                                }
+                                else
+                                {
+                                    echo "<label class='text-danger font-weight-bold'></label>Alta";   
+                                }
+                                ?>                      
+                            </td>
+                            <td><?php  echo $tarea["C"]["Categoria"];?></td>
+                            <td >
+                                <?php if ($tarea["T"]['status'] == 0): ?>
+                                <?php else: ?>
+                                <?php endif ?>
+                            </td>
+                            <td>
+                                <a href="<?php  echo APP_URL.'tareas/editar/'.$tarea["T"]['id']; ?>">
+                                    <button class="btn btn-sm btn-primary">Editar</button>
+                                </a>
+                                <a href="<?php  echo APP_URL.'tareas/eliminar/'.$tarea["T"]['id']; ?>">
+                                    <button class="btn btn-sm btn-danger">Eliminar</button>
+                                </a>
+                                <a href="<?php  echo APP_URL.'tareas/cambiarEstado/'.$tarea["T"]['id']."/".$tarea["T"]['status']; ?>">
+                                    <button class="btn btn-sm btn-dark">
+                                        <?php 
+                                            if($tarea["T"]['status'] == 0)
+                                            {
+                                                echo "Habilitar";
+                                            }
+                                            else
+                                            {
+                                                echo "Deshabilitar";
+                                            }
+                                        ?>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

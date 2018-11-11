@@ -1,0 +1,16 @@
+<h3 style="text-align:center">Editar categoria</h2>
+	<hr>
+	<div class="container">
+		<div class="col-sm-4 col-sm-offset-4">
+			<form action="<?php echo APP_URL.'categorias/editar'; ?>" method="POST">
+				<input type="hidden" value="<?php echo $this->categoria['id']; ?>" name="id">
+				<label for="nombre">Nombre</label>
+				<div class="input-group">			
+					<input type="text" name="nombre" class="form-control" value="<?php echo $this->categoria['nombre']; ?>">
+					<div class="input-group-append">
+					<button class="btn btn-sm btn-success" action="submit">Editar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
